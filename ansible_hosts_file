@@ -1,0 +1,26 @@
+---
+all:
+  children:
+    local:
+      hosts:
+        localhost
+        ansible_connection: local
+    cisco_xe:
+      hosts:
+        ios-xe-mgmt.cisco.com
+        ansible_connection: network_cli
+        ansible_network_os: iosxe
+        ansible_user: root
+        ansible_password: D_Vay!_10&
+        ansible_command_timeout: 30
+        ansible_port: 8181
+    sbx_nxos:
+      hosts:
+        sbx-nxos-mgmt.cisco.com
+        ansible_connection: network_cli
+        ansible_network_os: cisco_nxos
+        ansible_user: admin
+        ansible_password: Admin_1234!
+        ansible_command_timeout: 30
+        ansible_port: 8181
+
