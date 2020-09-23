@@ -9,12 +9,27 @@ devices:
       alias: 'Rack Management Switch'
       credentials:
         default:
-          username: cisco
-          password: cisco
+          username: '%ASK{}'
+          password: '%ASK{}'
         enable:
-          password: cisco
+          password: '%ASK{}'
       connections:
           cli:
               protocol: telnet
               ip: 10.1.10.102
 
+#celebes-sw05
+  elebes-sw05:
+      type: 'switch'
+      os: 'iosxe'
+      alias: 'Access Switch'
+      credentials:
+        default:
+          username: '%ENV{NET_USER}'
+          password: '%ENV{NET_PWD}'
+        enable:
+          password: '%ENV{NET_PWD}'
+      connections:
+          cli:
+              protocol: telnet
+              ip: 10.1.10.216
