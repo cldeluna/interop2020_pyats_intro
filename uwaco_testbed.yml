@@ -19,17 +19,17 @@ devices:
               ip: 10.1.10.102
 
 #celebes-sw05
-  elebes-sw05:
+  celebes-sw05:
       type: 'switch'
       os: 'iosxe'
       alias: 'Access Switch'
       credentials:
         default:
-          username: '%ENV{NET_USER}'
-          password: '%ENV{NET_PWD}'
+          username: "%ENV{NET_USER}"
+          password: "%ENV{NET_PWD}"
         enable:
-          password: '%ENV{NET_PWD}'
+          password: "%ENV{NET_PWD}"
       connections:
           cli:
-              protocol: telnet
+              protocol: ssh
               ip: 10.1.10.216
