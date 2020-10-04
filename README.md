@@ -1,15 +1,19 @@
 
 # Getting Started with pyATS (and Genie)
 
+![int-digital-logo-horiz-rgb](./images/int-digital-logo-horiz-rgb.png)
+
+This is the companion repository to my pyATS session in the Automation Track hosted by [![Network to Code](./images/NTC_header-02-1-1-1.png)](https://www.networktocode.com/) 
+
 ### What is Python Automated Test System (pyATS)?
 
 None of the answers I found to this question really made much sense to me initially.
 
-A Python3 based **Test Automation and Validation Framework** developed by Cisco (but open and extensible to any vendor) is probably the best short answer but still too vague. 
+*A Python3 based **Test Automation and Validation Framework** developed by Cisco* (but open and extensible to any vendor) is probably the best short answer but still too vague. 
 
-Add in Genie because at least originally you always heard bout Genie and pyATS together but it was never clear why.  Today Cisco is working hard to streamline this so that Genie (I like to think of it as the parsing and testing library) and pyATS (the overarching testing support framework) are bundled together. 
+Add in Genie because at least originally you always heard about Genie and pyATS together but it was never clear why.  Today Cisco is working hard to streamline this so that Genie (I like to think of it as the parsing and testing library) and pyATS (the overarching testing support framework) are bundled together with other modules but under the one pyATS umbrella. 
 
-For a while I dismissed it because I thought it was a Python testing framework like PyTest or Unittest but common sense told me there had to be more to it than that. After all, why would Cisco develop a Python testing framework?   Well, because it **IS** a testing framework but for your network rather than for your code!
+Initally, I dismissed it because I thought it was a Python testing framework like PyTest or Unittest but common sense told me there had to be more to it than that.  After all, why would Cisco develop a Python testing framework?   Well, because it **IS** a testing framework but **for your network** rather than for your code!
 
 PyATS is a **python framework to help you test your network**!  Like, actual functional testing!!
 
@@ -17,28 +21,40 @@ PyATS is a **python framework to help you test your network**!  Like, actual fun
 - What changed from yesterday?
 - Log my changes for my Change Request ticket in a single command!
 - Do I have these bgp neighbors after my change?
+- Am I missing any routes after my change?  Have new routes been added?
 
 Wow!
 
-But still, I didn't pursue it because everything I saw focused on the CLI options available and while clearly powerful and returning structured data I'm far more interested in working with the data in a script.  I don't want structured data output to the screen. I want to work with that structured data and apply logic!   Luckily, the CLI is just one way to use this powerful framework!  It can be run from the CLI **or** as part of your Python script and there are good use cases for both.
+Think about all the tests you would execute if 
 
-I'm not going to focus too much on the CLI version of this.  If you are more comfortable not having to deal with scripts then there is alot of content out there for you to look at showing the CLI.  In my opinion, this just delays the inevitable but some of the scripts will note their CLI equivalents if you just can't help yourself.
+- you had an order of magnitude more time
+- It was effortless to execute a test
+- If each test and result automatically documented itself
+- If you didn't even need eyeballs! Rather, a script would give each tests a pass or fail based on your conditions.
+
+And then think how much easier your migrations would be for you and how good you will look to your users when your migrations are completed more quickly and with a high degree of accuracy.  Your documentation will be effortless and unmatched!
+
+But still, I didn't pursue it because everything I saw focused on the CLI options available and while clearly powerful and returning structured data I'm far more interested in working with the data in a script.  I don't want structured data output to the screen. I want to work with that structured data and apply logic!   
+
+Luckily, the CLI is just one way to use this powerful framework!  It can be run from the CLI **or** as part of your Python script and there are good use cases for both.
+
+I'm not going to focus too much on the CLI version of this.  If you are more comfortable not having to deal with scripts then there is alot of content out there for you to look at showing the CLI.  In my opinion, this just delays the inevitable (you learning Python!) but some of the scripts will note their CLI equivalents if you just can't help yourself.
 
 For those of you already comfortable with basic Python scripts, then you are my target audience!
 
 In addition, if you spend alot of time parsing Cisco output then **you need to take a look at this module**!
 
-For those of you that know a bit about Ansible or Nornir, then think of pyATS as something comparable (to a degree) and complementary  (it is a framework) but focused on testing network devices.
+For those of you that know a bit about Ansible or Nornir, then think of pyATS as something comparable (to a degree) and complementary  (it is a framework) but focused on testing network devices with some unique featuers.
 
-| Function                                     | pyATS                                                 | Comparable Technology Equivalent                             |
-| -------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
-| List of devices and how to access            | Testbed file                                          | Ansible Host file<br />Nornir Hosts file<br />Netmiko connection object |
-| Topology                                     | Part of the Testbed file                              | N/A                                                          |
-| Establish a connection to a device           | Object connect method<br />device.connect()           | Ansible Playbook and Network Modules<br />Nornir instance <br />Netmiko instance |
-| Execute show commands                        | Object parse method<br />device.parse('show version') | Ansible Playbook and Network Modules<br />Nornir instance run method<br />Netmiko connect method |
-| "Parse" show commands to get structured data | Object parse method<br />device.parse('show version') | TextFSM, Netmiko with TextFSM option<br />Napalm, like Genie will return structure data for supported commands |
-| Diff two different outputs                   | genie diff                                            | Python code <br />Ansible Playbook                           |
-| Testing                                      | Stay Tuned!!!                                         | Python code <br />Ansible Playbook                           |
+| Function                                     | pyATS                                                        | Comparable Technology Equivalent                             |
+| -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| List of devices and how to access            | Testbed file                                                 | Ansible Host file<br />Nornir Hosts file<br />Netmiko connection object |
+| Topology                                     | Part of the Testbed file                                     | N/A                                                          |
+| Establish a connection to a device           | Object connect method<br />device.connect()<br />device.connect(learn_os=True, learn_hostname=True) | Ansible Playbook and Network Modules<br />Nornir instance <br />Netmiko instance |
+| Execute show commands                        | device.execute() # Raw Output<br />device.parse('show version’) # Object Parse | Ansible Playbook and Network Modules<br />Nornir instance run method<br />Netmiko connect method |
+| "Parse" show commands to get structured data | Object Parse method<br />device.parse('show version')        | TextFSM, Netmiko with TextFSM option<br />net_connect.send_command("show version", use_textfsm=True)<br />Napalm, like Genie will return structure data for supported commands |
+| Diff two different outputs                   | genie diff<br />pats diff                                    | Python code <br />Ansible Playbook                           |
+| Testing                                      | pyats learn<br />pyats run                                   | Python code <br />Ansible Playbook                           |
 
 Official Documentation:
 
@@ -83,6 +99,95 @@ So why should you take a look at pyATS?
 
 If you have not done all of that heavy lifting, then starting with pyATS gets you "simplified parsing" to begin with but really it sets you up to use a testing framework for your network!
 
+Lets look at the PRE/POST MAC address example using the pyATS CLI or Shell.
+
+Three commands and no scripting other than to define your testbed file with your devices:
+
+| Command                                                      | Action                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| pyats parse "show mac address-table" --testbed-file uwaco_testbed.yml --output PRE | Execute the "show MAC address-table" command on the device or devices in my testbed file and save the structured and unstructured output in a subdirectory alley PRE |
+| pyats parse "show mac address-table" --testbed-file uwaco_testbed.yml --output POST | Same but save this output in a subdirectory called POST      |
+| pyats diff PRE POST                                          | Compare and output the differences in standard Unix Diff format. |
+
+Sample Execution:
+
+```bash
+(pyats) claudia@Claudias-iMac pyats_intro % pyats parse "show mac address-table" --testbed-file uwaco_testbed.yml --output PRE 
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.73it/s]
++==============================================================================+
+| Genie Parse Summary for mgmt-sw05                                            |
++==============================================================================+
+|  Connected to mgmt-sw05                                                      |
+|  -  Log: PRE/connection_mgmt-sw05.txt                                        |
+|------------------------------------------------------------------------------|
+|  Parsed command 'show mac address-table'                                     |
+|  -  Parsed structure: PRE/mgmt-sw05_show-mac-address-table_parsed.txt        |
+|  -  Device Console:   PRE/mgmt-sw05_show-mac-address-table_console.txt       |
+|------------------------------------------------------------------------------|
+
+(pyats) claudia@Claudias-iMac pyats_intro % pyats parse "show mac address-table" --testbed-file uwaco_testbed.yml --output POST
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.56it/s]
++==============================================================================+
+| Genie Parse Summary for mgmt-sw05                                            |
++==============================================================================+
+|  Connected to mgmt-sw05                                                      |
+|  -  Log: POST/connection_mgmt-sw05.txt                                       |
+|------------------------------------------------------------------------------|
+|  Parsed command 'show mac address-table'                                     |
+|  -  Parsed structure: POST/mgmt-sw05_show-mac-address-table_parsed.txt       |
+|  -  Device Console:   POST/mgmt-sw05_show-mac-address-table_console.txt      |
+|------------------------------------------------------------------------------|
+
+(pyats) claudia@Claudias-iMac pyats_intro % pyats diff PRE POST                                                                
+1it [00:00, 531.66it/s]
++==============================================================================+
+| Genie Diff Summary between directories PRE/ and POST/                        |
++==============================================================================+
+|  File: mgmt-sw05_show-mac-address-table_parsed.txt                           |
+|   - Diff can be found at ./diff_mgmt-sw05_show-mac-address-table_parsed.txt  |
+|------------------------------------------------------------------------------|
+
+(pyats) claudia@Claudias-iMac pyats_intro % cat ./diff_mgmt-sw05_show-mac-address-table_parsed.txt
+--- PRE/mgmt-sw05_show-mac-address-table_parsed.txt
++++ POST/mgmt-sw05_show-mac-address-table_parsed.txt
+ mac_table:
+  vlans:
+   1:
+    mac_addresses:
+-    000b.7866.79f7: 
+-     interfaces: 
+-      FastEthernet1/0/1: 
+-       entry_type: dynamic
+-       interface: FastEthernet1/0/1
+-     mac_address: 000b.7866.79f7
+-    0011.3228.d79b: 
+-     interfaces: 
+-      GigabitEthernet1/0/4: 
+-       entry_type: dynamic
+-       interface: GigabitEthernet1/0/4
+-     mac_address: 0011.3228.d79b
++    0011.93ed.b349: 
++     interfaces: 
++      FastEthernet1/0/24: 
++       entry_type: dynamic
++       interface: FastEthernet1/0/24
++     mac_address: 0011.93ed.b349
+-    2c33.61ec.bbe6: 
+-     interfaces: 
+-      GigabitEthernet1/0/4: 
+-       entry_type: dynamic
+-       interface: GigabitEthernet1/0/4
+-     mac_address: 2c33.61ec.bbe6
++    f029.295c.cd18: 
++     interfaces: 
++      FastEthernet1/0/47: 
++       entry_type: dynamic
++       interface: FastEthernet1/0/47
++     mac_address: f029.295c.cd18
+-total_mac_addresses: 33
++total_mac_addresses: 32
+```
+
 
 
 #### Testing
@@ -91,19 +196,28 @@ With parsing, we've just scratched the surface of pyATS.    We have the structur
 
 PyATS is very good at parsing because it **needs structured data to automate the testing of your network**.
 
-So this is taking our automation to the next level.  We've been so hung up on logging in to the device, running commands, getting output, and parsing that output that sometimes the effort to get that point can feel like the final accomplishment.  While it is an accomplishment, its only the beginning!
+So this is taking our automation to the next level.  We've been so hung up on logging in to the device, running commands, getting output, and parsing that output that sometimes the effort to get to that point can feel like the final accomplishment.  Make no mistake, it **is** an accomplishment, but its only the beginning!
 
 
 
 ### Creating Your Environment
 
-PyATS is supported on Linux with Python 3.4 or greater (but 3.5 or later is recommended) . There is no Windows support at the time of writing (2020-04) but Mac OS X is supported.  For those of you on Windows, fear not, as you can always spin up a Virtual Machine or a Docker image.  Keep reading to learn more about your Docker image options.    
+PyATS is supported on Linux with Python 3.4 or greater (but 3.5 or later is recommended) . There is no Windows support at the time of writing (2020-10) without  **Windows Subsystem for Linux** (WSL) but Mac OS X is supported.  For those of you on Windows, without WSL, fear not, as you can always spin up a Virtual Machine or a Docker image.  Keep reading to learn more about your Docker image options.    
 
 Always start with a virtual environment.  See the [Real Python vENV primer](https://realpython.com/python-virtual-environments-a-primer/) for more details on that.
+
+```bash
+claudia@Claudias-iMac vEnvs % python3 -m venv interop2020_pyats_intro
+claudia@Claudias-iMac vEnvs % cd interop2020_pyats_intro
+claudia@Claudias-iMac vEnvs % source ~/vEnvs/interop2020_pyats_intro/bin/activate
+
+```
 
 Once you are in your virtual environment, you need to install the pyATS module and the Genie Libraries (now basically one framework encompassed in pyATS).
 
 There is alot of good material out there on how to install pyATS. Start with the [DevNet installation documentation](https://pubhub.devnetcloud.com/media/genie-docs/docs/installation/installation.html).
+
+Check [PyPI to find the latests version](https://pypi.org/project/pyats/) (2.9 as of this writing in 2020-10).
 
 Most will tell you to install pyATS with the Genie library and that is a good minimum installation for testing and parsing.   
 
