@@ -32,8 +32,8 @@ devices:
         port: 8181
     credentials:
       default:
-        password: "%ENV{NX_PWD}"
         username: "%ENV{NX_USR}"
+        password: "%ENV{NX_PWD}"
       enable:
         password: "%ENV{NX_PWD}"
     os: nxos
@@ -46,9 +46,10 @@ devices:
         port: 8181
     credentials:
       default:
-        username: "%ENV{CSR_PWD}"
-        password: "%ENV{CSR_USR}"
+        username: "%ENV{CSR_USR}"
+        password: "%ENV{CSR_PWD}"
       enable:
         password: "%ENV{CSR_PWD}"
     os: iosxe
+    platform: asr1k
     type: CSR1000v
