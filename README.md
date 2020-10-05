@@ -714,3 +714,7 @@ pyats.topology.loader is a required dependency for this command. 'interactive' s
 
 ```
 
+## Licensing
+
+This code is licensed under the BSD 3-Clause License. See [LICENSE](LICENSE) for details.
+
