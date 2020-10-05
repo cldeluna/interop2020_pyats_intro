@@ -17,6 +17,7 @@ devices:
       enable:
         password: Admin_1234!
     os: nxos
+    platform: n9kv
     type: Nexus9000v
   csr1000v-1:
     connections:
@@ -31,4 +32,5 @@ devices:
       enable:
         password: C1sco12345
     os: iosxe
+    platform: asr1k
     type: CSR1000v
