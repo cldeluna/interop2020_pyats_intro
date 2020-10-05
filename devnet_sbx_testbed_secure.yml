@@ -1,0 +1,54 @@
+---
+testbed:
+  name: DevNet_Always_On_Sandbox_Devices Secure TestBed - Environment Variables
+
+# printenv to view all environment variables
+# echo $<env var name>
+# Example  echo $SHELL
+# Temporary env vars
+# export NX_USR=admin
+# Example:
+#(interop2020_pyats_intro) claudia@Claudias-iMac interop2020_pyats_intro % export NX_USR=admin
+#(interop2020_pyats_intro) claudia@Claudias-iMac interop2020_pyats_intro % echo $NX_USR
+#admin
+#
+# Validate Testbed file
+# pyats validate testbed devnet_sbx_testbed.yml
+#
+#  export NX_PWD=Admin_1234!
+#  export NX_USR=admin
+#  echo $NX_PWD
+#  echo $NX_PWD
+#  Tip: If your script "hangs" or stops on the password or username prompt check to make sure your env vars are defined
+
+
+
+devices:
+  sbx-n9kv-ao:
+    connections:
+      cli:
+        ip: sbx-nxos-mgmt.cisco.com
+        protocol: ssh
+        port: 8181
+    credentials:
+      default:
+        password: "%ENV{NX_PWD}"
+        username: "%ENV{NX_USR}"
+      enable:
+        password: "%ENV{NX_PWD}"
+    os: nxos
+    type: Nexus9000v
+  csr1000v-1:
+    connections:
+      cli:
+        ip: ios-xe-mgmt-latest.cisco.com
+        protocol: ssh
+        port: 8181
+    credentials:
+      default:
+        username: "%ENV{CSR_PWD}"
+        password: "%ENV{CSR_USR}"
+      enable:
+        password: "%ENV{CSR_PWD}"
+    os: iosxe
+    type: CSR1000v
