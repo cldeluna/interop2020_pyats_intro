@@ -1,0 +1,3 @@
+﻿hostname,ip,username,password,enable_password,protocol,port,os
+sbx-n9kv-ao,sbx-nxos-mgmt.cisco.com,admin,Admin_1234!,Admin_1234!,ssh,8181,nxos
+csr1000v-1,ios-xe-mgmt-latest.cisco.com,developer,C1sco12345,C1sco12345,ssh,8181,iosxe
