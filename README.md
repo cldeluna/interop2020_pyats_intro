@@ -25,16 +25,18 @@ PyATS is a **python framework to help you test your network**!  Like, actual fun
 
 Wow!
 
-Think about all the tests you would execute if 
+Think about all the tests you would execute if: 
 
-- you had an order of magnitude more time
-- It was effortless to execute a test
-- If each test and result automatically documented itself
-- If you didn't even need eyeballs! Rather, a script would give each tests a pass or fail based on your conditions.
+- you had an order of magnitude more time because you worked more efficiently
+- it was effortless to execute a test
+- each test and result automatically documented itself
+- you didn't even need eyeballs! Rather, a script would give each tests a pass or fail based on your conditions
 
 And then think how much easier your migrations would be for you and how good you will look to your users when your migrations are completed more quickly and with a high degree of accuracy.  Your documentation will be effortless and unmatched!
 
-But still, I didn't pursue it because everything I saw focused on the CLI options available and while clearly powerful and returning structured data I'm far more interested in working with the data in a script.  I don't want structured data output to the screen. I want to work with that structured data and apply logic!   
+Dread those migration window telcons?  They are a thing of the past my friend.  Set up a Webex Teams space for your migration.  Invite anyone who is interested to join the space.  Execute your work via a chat bot if you like.  Execute your validation tests via a chatbot who will return the results to the migration space.  Everyone is updated efficiently and impressed with not only your transparency but that you are so confident in your work everyone gets to watch real time!
+
+To be honest I still didn't get too excited about it because everything I saw focused on the CLI options available and while clearly powerful and returning structured data I'm far more interested in working with the data in a script.  I don't want structured data output to the screen. I want to work with that structured data and apply logic!   
 
 Luckily, the CLI is just one way to use this powerful framework!  It can be run from the CLI **or** as part of your Python script and there are good use cases for both.
 
