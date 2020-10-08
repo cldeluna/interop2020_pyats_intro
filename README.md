@@ -1,5 +1,6 @@
-
 # Getting Started with pyATS (and Genie)
+
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/cldeluna/interop2020_pyats_intro)
 
 ![int-digital-logo-horiz-rgb](./images/int-digital-logo-horiz-rgb.png)
 
