@@ -87,7 +87,7 @@ def main():
     Simple script which loads the text output of a show command from a variable and
     uses the Genie parsing engine to parse the output.
 
-    This shows how to use the Genie parsers wit content obtained elsewhere,
+    This shows how to use the Genie parsers with content obtained elsewhere,
     - a variable
     - a text file
     - output from some other means
@@ -100,8 +100,7 @@ def main():
 
     print("Loading show command output...")
     response = load_data()
-    print(f"show command output is: \b{response}")
-
+    print(f"\n==== show command output form variable is: \b{response}")
 
     print(f"\n=================== DEVICE PARSING {device.name} ===================")
     parsed_output = device.parse('show version', output=response)
